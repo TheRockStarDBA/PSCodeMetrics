@@ -30,9 +30,11 @@ Test-Function                        3          29             1
 ## Future goals
 This is a very early draft of a module, and needs a ton of work to be really useful! I have lots of ideas for it, but would love to get input from the community, especially discussion about how best to evaluate code maintainability. 
 
-Current functionality allows gathering basic maintainability information for scripts and functions. Returning information about an entire module will be available soon.
+Current functionality allows gathering basic maintainability information for scripts and functions. Returning information about an entire module is partially working.
 
 Eventually I'd like to include an overall grading system that will indicate a script's score on a maintainability index, but this is a very subjective topic and I'd like to get some agreement from the community on how to implement this.
+
+Other goals may be things like custom object types and custom formats for optimizing output.
 
 ## Contributing
 If you'd like to contribute to this project you can do so in 3 ways:
