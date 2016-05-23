@@ -2,20 +2,26 @@
 {
     <#
             .SYNOPSIS
-            Get code metrics for a script or module
+            Get code metrics for a module
     #>
     [CmdletBinding()]
     param
     (
         [Parameter(Mandatory = $true)]
         [string]
-        $Path
+        $ModuleName
     )
     
-    $Path = Convert-Path -Path $Path
-    $Ast = Get-Ast -Path $Path
+    # need to check if module is available in session first
+    # if not remove it at the end
+    $global:ImportState = [bool](Get-Module -Name $ModuleName)
     
-    [PSCustomObject]@{
-        CyclomaticComplexity = Measure-CyclomaticComplexity -Ast $Ast
+    $Module = Import-Module -Name $ModuleName -PassThru -Force    
+    
+    foreach ($Command in $Module.ExportedCommands.Values.Name)
+    {
+        Measure-Function -Command "$($Module.Name)\$Command"
     }
+    
+    if (!$ImportState) { Remove-Module -Name $ModuleName -Force }
 }
